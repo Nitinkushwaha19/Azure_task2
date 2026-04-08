@@ -1,16 +1,3 @@
-# Generate SSH key pair
-resource "tls_private_key" "ssh_key" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-# Save private key to local file (optional, for SSH access)
-resource "local_file" "private_key" {
-  content         = tls_private_key.ssh_key.private_key_pem
-  filename        = "${path.module}/ssh_key.pem"
-  file_permission = "0600"
-}
-
 # Resource group
 resource "azurerm_resource_group" "RG" {
   name     = var.resource_group_name
@@ -116,11 +103,6 @@ resource "azurerm_linux_virtual_machine" "VM" {
   network_interface_ids = [
     azurerm_network_interface.NIC.id,
   ]
-
-  admin_ssh_key {
-    username   = var.admin_username
-    public_key = tls_private_key.ssh_key.public_key_openssh
-  }
 
   os_disk {
     caching              = "ReadWrite"

@@ -9,7 +9,6 @@ network_interface_name      = "cmaz-2ehw6cyk-mod4-nic"
 linux_vm_name               = "cmaz-2ehw6cyk-mod4-vm"
 vm_size                     = "Standard_B2s_v2"
 admin_username              = "azureuser"
-ssh_public_key_path         = "~/.ssh/id_rsa.pub"
 tags = {
   Creator = "nitin_ajaykushwaha@epam.com"
 }

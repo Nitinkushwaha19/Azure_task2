@@ -88,7 +88,3 @@ variable "vm_password" {
   description = "admin password for the virtual machine"
 }
 
-variable "ssh_public_key_path" {
-  type        = string
-  description = "path to the SSH public key"
-}
