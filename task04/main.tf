@@ -1,3 +1,16 @@
+# Generate SSH key pair
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+# Save private key to local file (optional, for SSH access)
+resource "local_file" "private_key" {
+  content         = tls_private_key.ssh_key.private_key_pem
+  filename        = "${path.module}/ssh_key.pem"
+  file_permission = "0600"
+}
+
 # Resource group
 resource "azurerm_resource_group" "RG" {
   name     = var.resource_group_name
