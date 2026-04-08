@@ -112,24 +112,26 @@ resource "azurerm_linux_virtual_machine" "VM" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts-gen2"
+    offer     = "0001-com-ubuntu-server-noble"
+    sku       = "24_04-lts-gen2"
     version   = "latest"
   }
 
   admin_password = var.vm_password
 
+  # Install and configure Nginx using remote-exec provisioner
   provisioner "remote-exec" {
     inline = [
-      "sudo apt update",
+      "sudo apt-get update",
       "sudo apt-get install -y nginx",
       "sudo systemctl start nginx",
       "sudo systemctl enable nginx",
-      "sudo ufw allow Nginx Full",
+      "sudo ufw allow 'Nginx Full'",
       "sudo ufw allow OpenSSH",
-      "echo '<h1>Welcome to Nginx on Azure VM!</h1>' | sudo tee /var/www/html/index.html",
+      "echo '<h1>Welcome to nginx!</h1>' | sudo tee /var/www/html/index.html",
       "echo '<p>VM Name: ${var.linux_vm_name}</p>' | sudo tee -a /var/www/html/index.html",
       "echo '<p>Deployed with Terraform</p>' | sudo tee -a /var/www/html/index.html",
+      "echo '<p>Creator: nitin_ajaykushwaha@epam.com</p>' | sudo tee -a /var/www/html/index.html",
       "sudo systemctl reload nginx"
     ]
 
