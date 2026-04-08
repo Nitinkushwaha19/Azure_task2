@@ -77,7 +77,7 @@ resource "azurerm_network_interface" "NIC" {
   tags                = var.tags
 
   ip_configuration {
-    name                          = "internal"
+    name                          = var.network_interface_ip_configuration_name
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.publicIP.id
@@ -121,7 +121,7 @@ resource "azurerm_linux_virtual_machine" "VM" {
     version   = "latest"
   }
 
-  admin_password = var.admin_password
+  admin_password = var.vm_password
 
   provisioner "remote-exec" {
     inline = [
@@ -141,7 +141,7 @@ resource "azurerm_linux_virtual_machine" "VM" {
       type     = "ssh"
       host     = azurerm_public_ip.publicIP.ip_address
       user     = var.admin_username
-      password = var.admin_password
+      password = var.vm_password
       timeout  = "5m"
     }
   }

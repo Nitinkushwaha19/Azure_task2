@@ -60,6 +60,12 @@ variable "network_interface_name" {
   description = "name of the network interface"
 }
 
+variable "network_interface_ip_configuration_name" {
+  type        = string
+  description = "name of the network interface IP configuration"
+  default     = "internal"
+}
+
 # Virtual Machine
 variable "linux_vm_name" {
   type        = string
@@ -76,7 +82,7 @@ variable "admin_username" {
   description = "admin username for the virtual machine"
 }
 
-variable "admin_password" {
+variable "vm_password" {
   type        = string
   sensitive   = true
   description = "admin password for the virtual machine"
