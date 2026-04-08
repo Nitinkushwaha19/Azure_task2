@@ -44,6 +44,16 @@ variable "network_security_group_name" {
   description = "name of the network security group"
 }
 
+variable "nsg_http_rule" {
+  type        = string
+  description = "name of the NSG rule to allow HTTP traffic"
+}
+
+variable "nsg_ssh_rule" {
+  type        = string
+  description = "name of the NSG rule to allow SSH traffic"
+}
+
 # Network Interface
 variable "network_interface_name" {
   type        = string

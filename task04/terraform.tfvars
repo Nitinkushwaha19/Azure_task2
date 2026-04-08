@@ -13,3 +13,6 @@ ssh_public_key_path         = "~/.ssh/id_rsa.pub"
 tags = {
   Creator = "nitin_ajaykushwaha@epam.com"
 }
+
+nsg_http_rule = "AllowHTTP"
+nsg_ssh_rule  = "AllowSSH"
